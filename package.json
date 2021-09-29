@@ -1,0 +1,22 @@
+{
+  "name": "mongodb",
+  "version": "1.0.0",
+  "main": "mongodb.js",
+  "scripts": {
+    "start":"node src/index.js",
+    "dev":"nodemon src.index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongodb": "^4.1.2",
+    "mongoose": "^5.3.16",
+    "validator": "^10.9.0"
+  },
+  "keywords": [],
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
