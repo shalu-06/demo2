@@ -1,10 +1,10 @@
 {
   "name": "mongodb",
   "version": "1.0.0",
-  "main": "mongodb.js",
+  "main": "src/db/index.js",
   "scripts": {
-    "start":"node src/index.js",
-    "dev":"nodemon src.index.js"
+    "start":"node src/db/index.js",
+    "dev":"nodemon src/db/index.js"
   },
   "author": "",
   "license": "ISC",

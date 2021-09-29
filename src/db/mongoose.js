@@ -1,8 +1,10 @@
 const mongoose = require('mongoose')
-const validator = require('validator')
+//const validator = require('validator')
 mongoose.connect(('mongodb://127.0.0.1:27017/task-manager-api'),{
     useNewUrlParser:true,
-    useCreateIndex:true
+    useCreateIndex:true,
+    useUnifiedTopology:true,
+    useFindAndModify:false
 })
 
 // const User = mongoose.model('User',{
@@ -57,25 +59,14 @@ mongoose.connect(('mongodb://127.0.0.1:27017/task-manager-api'),{
 //     console.log('Error ',error)
 //  })
 
-const Task = mongoose.model('Tasks',{
-    description:{
-         type:String,
-         trim:true,
-         required:true
-    },
-    completed:{
-        type:Boolean,
-        default:false
-    }
-})
 
-const task = new Task({
-    description: '       Yet not Created git   ',
-   // completed:false
-})
+// const task = new Task({
+//     description: '       Yet not Created git   ',
+//    // completed:false
+// })
 
-task.save().then(() => {
-    console.log(task)
-}).catch((e) => {
-    console.log(e)
-})
+// task.save().then(() => {
+//     console.log(task)
+// }).catch((e) => {
+//     console.log(e)
+// })
