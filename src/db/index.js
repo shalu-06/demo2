@@ -4,10 +4,23 @@ const User = require('../model/user.js')
 const Task = require('../model/task')
 const userRouter = require('../router/user')
 const taskRouter = require('../router/task')
-const app = express()
 
+const app = express()
 const port = process.env.PORT || 3000
 
+// app.use((req,res,next) => {
+//     // console.log(req.method, req.path)
+//     // next()
+//     if(req.method === 'GET'){
+//         res.send('GET requests are disabled')
+//     }else{
+//         next()
+//     }
+// })
+
+// app.use((req,res,next)=>{
+//     res.status(503).send('Site is currently down. Check back soon!')
+// })
 
 app.use(express.json())
 app.use(userRouter)
@@ -205,3 +218,25 @@ app.use(taskRouter)
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
+
+//const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+
+
+const myFunction = async () => {
+
+    // const password = 'Red12345'
+    // const hashedPassword = await bcrypt.hash(password,8)
+    // console.log(password)
+    // console.log(hashedPassword)
+
+    // const isMatch = await bcrypt.compare('Red12345',hashedPassword)
+    // console.log(isMatch)
+
+    const token = jwt.sign({_id: 'abc123'},'thisismynewcourse',{expiresIn:'7 days'})
+    console.log(token)
+
+    const data =  jwt.verify(token,'thisismynewcourse')
+     console.log(data)
+}
+myFunction()

@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "main": "src/db/index.js",
   "scripts": {
-    "start":"node src/db/index.js",
-    "dev":"nodemon src/db/index.js"
+    "start": "node src/db/index.js",
+    "dev": "nodemon src/db/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
     "mongodb": "^4.1.2",
     "mongoose": "^5.3.16",
+    "npm": "^7.24.1",
     "validator": "^10.9.0"
   },
   "keywords": [],
