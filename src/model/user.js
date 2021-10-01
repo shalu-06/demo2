@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Task = require('./task')
+
 const userSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -10,15 +12,15 @@ const userSchema = new mongoose.Schema({
     },
     email:{
         type:String,
-        required:true,
         unique:true,
-        //trim:true,
-        // toLowerCase:true,
-        // validate(value){
-        //     if(!validator.isEmail(value)){
-        //         throw new Error('Email is invalid')
-        //     }
-        // }
+        required:true,
+        trim:true,
+        lowercase:true,
+        validate(value){
+            if(!validator.isEmail(value)){
+                throw new Error('Email is invalid')
+            }
+        }
     },
     password:{
        type:String,
@@ -46,13 +48,23 @@ const userSchema = new mongoose.Schema({
             required:true
         }
     }]
+}, {
+    timestamps:true
+})
+
+userSchema.virtual('tasks',{
+    ref:'Task',
+    localField:'_id',
+    foreignField:'owner'
 })
 
 userSchema.methods.toJSON = function () {
     const user = this
     const userObject = user.toObject()
+
     delete userObject.password
     delete userObject.token
+
     return userObject
 }
 
@@ -62,6 +74,7 @@ userSchema.methods.generateAuthToken = async function (){
     
     user.tokens = user.tokens.concat({token})
     await user.save()
+    
     return token
 
 }
@@ -90,6 +103,12 @@ userSchema.pre('save',async function (next) {
     }
     next()
 
+})
+
+userSchema.pre('remove',async function (next) {
+    const user = this 
+    await Task.deleteMany({owner: user._id})
+    next()
 })
 
  const User = mongoose.model('User',userSchema

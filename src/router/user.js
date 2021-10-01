@@ -1,7 +1,7 @@
 const express = require('express')
 const User = require('../model/user')
-const router = new express.Router()
 const auth = require('../middleware/auth')
+const router = new express.Router()
 
 
 

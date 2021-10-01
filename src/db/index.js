@@ -1,7 +1,5 @@
 const express = require('express')
 require('./mongoose.js')
-const User = require('../model/user.js')
-const Task = require('../model/task')
 const userRouter = require('../router/user')
 const taskRouter = require('../router/task')
 
@@ -252,3 +250,17 @@ app.listen(port, () => {
 //     return {}
 // }
 // console.log(JSON.stringify(pet))
+
+const User = require('../model/user')
+const Task = require('../model/task')
+
+const main = async ()=> {
+    // const task = await Task.findById('6156902bafaccf0f4ab3623d')
+    // await task.populate('owner').execPopulate()
+    // console.log(task.owner)
+    const user = await User.findById('6156a4d032004c201f31ea96')
+    await user.populate('tasks').execPopulate()
+    console.log(user.tasks)
+}
+
+main()
